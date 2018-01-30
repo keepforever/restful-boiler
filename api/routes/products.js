@@ -4,11 +4,9 @@ const router = express.Router();
 const Product = require('../models/product');
 const mongoose = require('mongoose');
 
-const routeLogic = require('../../routeUtils/product');
+const routeLogic = require('../../routeUtils/products');
 // if you do not pass argument to find(), it will return all prods
 // here is where you would also set a limit or pagination.
-
-
 
 router.get('/', (req, res, next) => {
     routeLogic.getAllProducts(req, res, next);
