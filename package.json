@@ -1,6 +1,6 @@
 {
-  "name": "rest-api",
-  "version": "1.0.0",
+  "name": "",
+  "version": "",
   "description": "A Node.js RESTful API",
   "main": "index.js",
   "scripts": {
