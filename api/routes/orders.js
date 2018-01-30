@@ -75,7 +75,7 @@ router.post("/", (req, res, next) => {
 router.get("/:orderId", (req, res, next) => {
   Order.findById(req.params.orderId)
     .select("product quantity _id")
-    .populate('product')
+    .populate('product', '_id name') // second arg filters wanted props on product
     .exec()
     .then(order => {
       if (!order) {
