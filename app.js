@@ -14,6 +14,10 @@ const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 // for logging requests
 app.use(morgan('dev'));
+// make uploads publicly available so images can be displayed
+// firt arg '/uploads' says "parse only reqs with
+// that begginning then apply middleware"
+app.use('/uploads', express.static('uploads'));
 // extracts urlencoded data and makes readable to us.
 app.use(bodyParser.urlencoded({
     extended: false

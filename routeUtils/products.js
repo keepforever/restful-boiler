@@ -2,9 +2,15 @@
 const Product = require('../api/models/product');
 const mongoose = require('mongoose');
 
+// multer is package for accepting images via form data.
+// "dest:" specifies a folder where multer will try to store incoming files
+
+const multer = require('multer');
+const upload = multer({dest: '/uploads/'})
+
 module.exports = {
     getAllProducts: function(req, res, next) {
-        Product.find().select('name price _id'). // tell which props to fetch
+        Product.find().select('name price _id productImage'). // tell which props to fetch
         exec().then(docs => {
             // adding meta data to response
             const response = {
@@ -13,6 +19,7 @@ module.exports = {
                     return {
                         name: doc.name,
                         price: doc.price,
+                        productImage: doc.productImage,
                         _id: doc._id,
                         request: { // optional meta information
                             type: "GET",
@@ -33,7 +40,8 @@ module.exports = {
         const product = new Product({
             _id: new mongoose.Types.ObjectId(),
             name: req.body.name,
-            price: req.body.price
+            price: req.body.price,
+            productImage: req.file.path
         });
         // save is a method provided by mongoose that can be used on mongoose models.
         product
@@ -46,6 +54,7 @@ module.exports = {
                         name: result.name,
                         price: result.price,
                         _id: result._id,
+                        productImage: result.productImage,
                         request: {
                             type: "GET",
                             url: 'http://localhost:3000/products/' + result._id
@@ -64,7 +73,7 @@ module.exports = {
     getSingleProduct: function(req, res, next) {
         const id = req.params.productId;
         Product.findById(id)
-            .select('name price _id') // tell which props to fetch
+            .select('name price _id productImage') // tell which props to fetch
             .exec()
             .then(doc => {
                 console.log("doc as recieved from database: ", doc);
