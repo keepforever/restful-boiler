@@ -1,5 +1,6 @@
 {
     "env": {
-        "MONGO_ATLAS_PW": "tandingUp1984"
+        "MONGO_ATLAS_PW": "tandingUp1984",
+        "JWT_KEY": "tempJwtPassword"
     }
 }

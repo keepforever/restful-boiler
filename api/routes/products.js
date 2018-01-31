@@ -4,6 +4,7 @@ const Product = require('../models/product');
 const mongoose = require('mongoose');
 const routeLogic = require('../../routeUtils/products');
 const multer = require('multer');
+const checkAuth = require('../middleware/check-auth');
 // if you do not pass argument to find(), it will return all prods
 // here is where you would also set a limit or pagination.
 // multer is package for accepting images via form data.

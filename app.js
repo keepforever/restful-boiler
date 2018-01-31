@@ -12,6 +12,7 @@ mongoose.connect(
 // directs incoming requests to appropriate api file folder path.
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+const userRoutes = require('./api/routes/user');
 // for logging requests
 app.use(morgan('dev'));
 // make uploads publicly available so images can be displayed
@@ -51,6 +52,7 @@ app.use((req, res, next) =>  {
 // Routes which should handle requests
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
+app.use('/user', userRoutes);
 
 // handles and unknow requests and forward downstream
 // to next middleware
