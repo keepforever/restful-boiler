@@ -4,21 +4,29 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-mongoose.connect(
-    "mongodb://keepforever:" +
-    process.env.MONGO_ATLAS_PW +
-    "@learn-mongo-alpha-shard-00-00-14sf8.mongodb.net:27017,learn-mongo-alpha-shard-00-01-14sf8.mongodb.net:27017,learn-mongo-alpha-shard-00-02-14sf8.mongodb.net:27017/test?ssl=true&replicaSet=learn-mongo-alpha-shard-0&authSource=admin"
-);
 // directs incoming requests to appropriate api file folder path.
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/user');
+
+
+mongoose.connect(
+    "mongodb://keepforever:" +
+    process.env.MONGO_ATLAS_PW +
+    "@learn-mongo-alpha-shard-00-00-14sf8.mongodb.net:27017,learn-mongo-alpha-shard-00-01-14sf8.mongodb.net:27017,learn-mongo-alpha-shard-00-02-14sf8.mongodb.net:27017/test?ssl=true&replicaSet=learn-mongo-alpha-shard-0&authSource=admin",
+    {
+        useMongoClient: true
+    }
+);
+mongoose.Promise = global.Promise;
+
 // for logging requests
 app.use(morgan('dev'));
 // make uploads publicly available so images can be displayed
 // firt arg '/uploads' says "parse only reqs with
 // that begginning then apply middleware"
 app.use('/uploads', express.static('uploads'));
+
 // extracts urlencoded data and makes readable to us.
 app.use(bodyParser.urlencoded({
     extended: false
