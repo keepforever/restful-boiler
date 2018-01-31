@@ -13,10 +13,7 @@ const userRoutes = require('./api/routes/user');
 mongoose.connect(
     "mongodb://keepforever:" +
     process.env.MONGO_ATLAS_PW +
-    "@learn-mongo-alpha-shard-00-00-14sf8.mongodb.net:27017,learn-mongo-alpha-shard-00-01-14sf8.mongodb.net:27017,learn-mongo-alpha-shard-00-02-14sf8.mongodb.net:27017/test?ssl=true&replicaSet=learn-mongo-alpha-shard-0&authSource=admin",
-    {
-        useMongoClient: true
-    }
+    "@learn-mongo-alpha-shard-00-00-14sf8.mongodb.net:27017,learn-mongo-alpha-shard-00-01-14sf8.mongodb.net:27017,learn-mongo-alpha-shard-00-02-14sf8.mongodb.net:27017/test?ssl=true&replicaSet=learn-mongo-alpha-shard-0&authSource=admin"
 );
 mongoose.Promise = global.Promise;
 
